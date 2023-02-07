@@ -13,3 +13,5 @@ FROM alpine:latest
 COPY --from=build /go/bin/ChatGPT-API-server /usr/local/bin/
 
 RUN apk add --no-cache curl
+
+CMD  ["ChatGPT-API-server", "8080", "apikey", "-listen", "0.0.0.0"]
