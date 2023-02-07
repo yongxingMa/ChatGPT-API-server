@@ -3,7 +3,6 @@ package gtp
 import (
 	"bytes"
 	"encoding/json"
-	"github.com/ChatGPT-Hackers/ChatGPT-API-server/config"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -61,7 +60,8 @@ func Completions(msg string) (string, error) {
 		return "服务器错误请重试", err
 	}
 
-	apiKey := config.LoadConfig().ApiKey
+	//apiKey := config.LoadConfig().ApiKey
+	apiKey := "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"
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+apiKey)
 	client := &http.Client{}
