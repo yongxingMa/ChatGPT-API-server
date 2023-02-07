@@ -1,6 +1,12 @@
 package handlers
 
 import (
+	"github.com/ChatGPT-Hackers/ChatGPT-API-server/app"
+	"github.com/ChatGPT-Hackers/ChatGPT-API-server/e"
+	"github.com/ChatGPT-Hackers/ChatGPT-API-server/gtp"
+	"log"
+	"net/http"
+	"strings"
 	"time"
 
 	// Import local packages
@@ -63,4 +69,37 @@ func Client_register(c *gin.Context) {
 	connectionPool.Set(connection)
 	// Debug
 	println("New connection:", connection.Id)
+}
+
+// // # ChatGPT method
+func ChatGPT(c *gin.Context) {
+	var (
+		appG = app.Gin{C: c}
+		form ChatBody
+	)
+
+	httpCode, errCode := app.BindAndValid(c, &form)
+	if errCode != e.SUCCESS {
+		appG.Response(httpCode, errCode, nil)
+		return
+	}
+
+	requestText := strings.TrimSpace(form.Content)
+	reply, err := gtp.Completions(requestText)
+	if err != nil {
+		log.Printf("gtp request error: %v \n", err)
+		//return nil
+	}
+
+	appG.Response(http.StatusOK, e.SUCCESS, reply)
+}
+
+type ChatBody struct {
+	//TagID         int    `form:"tag_id" valid:"Required;Min(1)"`
+	//Title         string `form:"title" valid:"Required;MaxSize(100)"`
+	//Desc          string `form:"desc" valid:"Required;MaxSize(255)"`
+	Content string `form:"content" valid:"Required;MaxSize(65535)"`
+	//CreatedBy     string `form:"created_by" valid:"Required;MaxSize(100)"`
+	//CoverImageUrl string `form:"cover_image_url" valid:"Required;MaxSize(255)"`
+	//State         int    `form:"state" valid:"Range(0,1)"`
 }

@@ -38,12 +38,13 @@ func main() {
 	})
 	//// # Add routes
 	// Register new client connection
-	router.GET("/client/register", handlers.Client_register)
-	router.POST("/api/ask", handlers.API_ask)
-	router.GET("/api/connections", handlers.API_getConnections)
-	router.POST("/admin/users/add", handlers.Admin_userAdd)
-	router.POST("/admin/users/delete", handlers.Admin_userDel)
-	router.GET("/admin/users", handlers.Admin_usersGet)
+	router.POST("/chatGPT/api", handlers.ChatGPT)
+	//router.GET("/client/register", handlers.Client_register)
+	//router.POST("/api/ask", handlers.API_ask)
+	//router.GET("/api/connections", handlers.API_getConnections)
+	//router.POST("/admin/users/add", handlers.Admin_userAdd)
+	//router.POST("/admin/users/delete", handlers.Admin_userDel)
+	//router.GET("/admin/users", handlers.Admin_usersGet)
 
 	// Add a health endpoint
 	router.GET("/health", func(c *gin.Context) {

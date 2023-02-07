@@ -6,7 +6,7 @@ RUN apk add gcc build-base
 RUN mkdir -p /go/src/ChatGPT-API-server
 WORKDIR /go/src/ChatGPT-API-server
 
-RUN git clone https://github.com/ChatGPT-Hackers/ChatGPT-API-server/ .
+COPY ./ .
 RUN go install .
 
 FROM alpine:latest

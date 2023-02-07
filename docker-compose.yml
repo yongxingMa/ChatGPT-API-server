@@ -5,7 +5,7 @@ services:
     build: .
     ports:
       - "8080:8080"
-    command: ["ChatGPT-API-server", "8080", "<API_KEY>", "-listen", "0.0.0.0"]
+    command: ["ChatGPT-API-server", "8080", "apikey", "-listen", "0.0.0.0"]
     networks:
       - chatgpt-api-server_default
     healthcheck:
