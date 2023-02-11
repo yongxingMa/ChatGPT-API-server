@@ -16,11 +16,11 @@ import (
 
 func main() {
 	// get arg server port and admin key
-	if len(os.Args) < 3 {
-		println("Usage: ./ChatGPT-API-server <port> <admin key>")
-		return
-	}
-	println(os.Args[1], os.Args[2])
+	//if len(os.Args) < 3 {
+	//	println("Usage: ./ChatGPT-API-server")
+	//	return
+	//}
+	println(os.Args[1])
 
 	// Make database
 	err := utils.DatabaseCreate()
@@ -52,5 +52,5 @@ func main() {
 	})
 
 	// Start server
-	router.Run(":" + os.Args[1])
+	router.Run(":8080")
 }

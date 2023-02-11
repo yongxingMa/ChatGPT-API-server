@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 )
 
 const BASEURL = "https://api.openai.com/v1/"
@@ -40,6 +41,8 @@ type ChatGPTRequestBody struct {
 // -H "Authorization: Bearer your chatGPT key"
 // -d '{"model": "text-davinci-003", "prompt": "give me good song", "temperature": 0, "max_tokens": 7}'
 func Completions(msg string) (string, error) {
+
+	apiKey := os.Args[1]
 	requestBody := ChatGPTRequestBody{
 		Model:            "text-davinci-003",
 		Prompt:           msg,
@@ -61,7 +64,7 @@ func Completions(msg string) (string, error) {
 	}
 
 	//apiKey := config.LoadConfig().ApiKey
-	apiKey := "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"
+	//apiKey := "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"
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Authorization", "Bearer "+apiKey)
 	client := &http.Client{}
